@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://usa-vendor.netlify.app/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/footwear/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/clothing/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/colognes/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/airpods/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/accessories/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/how-it-works/</loc></url>
-  <url><loc>https://usa-vendor.netlify.app/contact/</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/footwear.html</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/clothing.html</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/colognes.html</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/airpods.html</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/accessories.html</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/how-it-works.html</loc></url>
+  <url><loc>https://usa-vendor.netlify.app/contact.html</loc></url>
 </urlset>
