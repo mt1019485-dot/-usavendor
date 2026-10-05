@@ -1,7 +1,10 @@
 let products=[],cart=JSON.parse(localStorage.getItem("usa_vendor_cart")||"[]");
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const money=n=>"$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});
-fetch("products.json").then(r=>r.json()).then(x=>{products=x;render();updateCart()});
+const pageCategory=new URLSearchParams(location.search).get("category");
+fetch(location.pathname.includes("/footwear/")||location.pathname.includes("/clothing/")||location.pathname.includes("/colognes/")||location.pathname.includes("/airpods/")||location.pathname.includes("/accessories/")?"../products.json":"products.json").then(r=>r.json()).then(x=>{products=x;
+ if(pageCategory){const target=document.querySelector(`#filters button[data-filter="${CSS.escape(pageCategory)}"]`);if(target){$$('#filters button').forEach(b=>b.classList.remove('active'));target.classList.add('active')}}
+ render();updateCart()});
 function safe(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
 const categoryImages={
  Footwear:"https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto%2Cu_9ddf04c7-2a9a-4d76-add1-d15af8f0263d%2Cc_scale%2Cfl_relative%2Cw_1.0%2Ch_1.0%2Cfl_layer_apply/26588138-63d6-4d84-a5c9-7eb47bae8946/NIKE%2BAIR%2BMAX%2B95%2BBIG%2BBUBBLE.png",
@@ -39,4 +42,4 @@ function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");se
 $("#openCart").onclick=openCart;$("#closeCart").onclick=closeCart;$("#overlay").onclick=closeCart;$("#checkout").onclick=checkout;
 $("#search").oninput=render;$("#sort").onchange=render;
 $$("#filters button").forEach(b=>b.onclick=()=>{$$("#filters button").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()});
-$$(".cat-grid button").forEach(b=>b.onclick=()=>{let c=b.dataset.cat;$$("#filters button").forEach(x=>x.classList.toggle("active",x.dataset.filter===c));document.querySelector("#shop").scrollIntoView({behavior:"smooth"});render()});
+$$('.cat-grid [data-cat]').forEach(b=>b.onclick=(e)=>{let c=b.dataset.cat;if(b.tagName==='A' && b.getAttribute('href') && b.getAttribute('href')!=='#shop') return;e.preventDefault();$$("#filters button").forEach(x=>x.classList.toggle("active",x.dataset.filter===c));document.querySelector("#shop").scrollIntoView({behavior:"smooth"});render()});

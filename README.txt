@@ -1,7 +1,7 @@
-USA VENDOR — NETLIFY READY
+USA Vendor — Google-ready Netlify package
 
-This build uses real product photography loaded from official brand image hosts for representative category images (Nike, Dior, Apple) plus a real-life watch image for Accessories. No local images folder is required.
+This package keeps the existing storefront design and adds SEO metadata, robots.txt, sitemap.xml, crawlable category pages, How It Works and Contact pages.
 
-Images are representative only and do not guarantee exact colorway, model, or current stock. Confirm availability and final pricing on WhatsApp.
+Deploy all files/folders to the connected GitHub repository. Netlify should auto-deploy from main.
 
-WhatsApp: +1 (812) 766-9345
+After deployment, add https://usa-vendor.netlify.app/ to Google Search Console, submit /sitemap.xml, then request indexing for the homepage and key category pages.
