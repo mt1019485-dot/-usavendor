@@ -1,5 +1,7 @@
 USA VENDOR — NETLIFY READY
-Upload the contents of this folder to Netlify.
-WhatsApp checkout: +1 (812) 766-9345
-Catalog is populated from the USA Vendor customer price list.
-Prices are starting prices and final availability/pricing should be confirmed on WhatsApp.
+
+This build uses real product photography loaded from official brand image hosts for representative category images (Nike, Dior, Apple) plus a real-life watch image for Accessories. No local images folder is required.
+
+Images are representative only and do not guarantee exact colorway, model, or current stock. Confirm availability and final pricing on WhatsApp.
+
+WhatsApp: +1 (812) 766-9345

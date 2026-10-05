@@ -3,12 +3,19 @@ const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const money=n=>"$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});
 fetch("products.json").then(r=>r.json()).then(x=>{products=x;render();updateCart()});
 function safe(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+const categoryImages={
+ Footwear:"https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto%2Cu_9ddf04c7-2a9a-4d76-add1-d15af8f0263d%2Cc_scale%2Cfl_relative%2Cw_1.0%2Ch_1.0%2Cfl_layer_apply/26588138-63d6-4d84-a5c9-7eb47bae8946/NIKE%2BAIR%2BMAX%2B95%2BBIG%2BBUBBLE.png",
+ Clothing:"https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/dbcb43d1-d508-4275-b239-f988667d5001/AS%2BM%2BNK%2BTCH%2BFLC%2BFZ%2BWR%2BHOODIE.png",
+ Colognes:"https://www.dior.com/dw/image/v2/BGXS_PRD/on/demandware.static/-/Library-Sites-DiorSharedLibrary/default/dw0a046890/images/beauty/01-FRAGRANCES/2025/PDP-REVAMP/SAUVAGE/Y0685240/DIOR_COM_SAUVAGE_10YEARS_1688x3000px_10.jpg?sw=800",
+ AirPods:"https://www.apple.com/newsroom/images/2025/09/introducing-airpods-pro-3-the-ultimate-audio-experience/article/Apple-AirPods-Pro-3-hero-250909_inline.jpg.large.jpg",
+ Accessories:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85"
+};
 function render(){
  let q=$("#search").value.trim().toLowerCase(), f=document.querySelector("#filters .active").dataset.filter;
  let list=products.filter(p=>(f==="All"||p.category===f)&&p.name.toLowerCase().includes(q));
  const s=$("#sort").value;if(s==="low")list.sort((a,b)=>a.price-b.price);if(s==="high")list.sort((a,b)=>b.price-a.price);
- $("#grid").innerHTML=list.map(p=>{const i=products.indexOf(p), initials=p.name.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
- return `<article class="product"><div class="visual"><span class="tag">${safe(p.category)}</span><span class="initial">${safe(initials)}</span></div><div class="product-body"><div class="product-cat">${safe(p.category)}</div><h3>${safe(p.name)}</h3><div class="product-foot"><span class="price"><small>FROM </small>${money(p.price)}</span><button class="add" onclick="add(${i})">Add +</button></div></div></article>`}).join("")||'<div class="empty" style="grid-column:1/-1">No products matched your search.</div>';
+ $("#grid").innerHTML=list.map(p=>{const i=products.indexOf(p), initials=p.name.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase(), img=categoryImages[p.category];
+ return `<article class="product"><div class="visual has-photo"><img src="${img}" alt="Representative ${safe(p.category)} product image" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-note">REPRESENTATIVE IMAGE</span><span class="tag">${safe(p.category)}</span><span class="initial fallback">${safe(initials)}</span></div><div class="product-body"><div class="product-cat">${safe(p.category)}</div><h3>${safe(p.name)}</h3><div class="product-foot"><span class="price"><small>FROM </small>${money(p.price)}</span><button class="add" onclick="add(${i})">Add +</button></div></div></article>`}).join("")||'<div class="empty" style="grid-column:1/-1">No products matched your search.</div>';
 }
 function add(i){const p=products[i],x=cart.find(a=>a.id===p.id);x?x.qty++:cart.push({...p,qty:1});save();updateCart();toast("Added to cart");openCart()}
 function save(){localStorage.setItem("usa_vendor_cart",JSON.stringify(cart))}
