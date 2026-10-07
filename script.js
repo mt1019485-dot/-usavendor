@@ -13,12 +13,15 @@ const categoryImages={
  AirPods:"https://www.apple.com/newsroom/images/2025/09/introducing-airpods-pro-3-the-ultimate-audio-experience/article/Apple-AirPods-Pro-3-hero-250909_inline.jpg.large.jpg",
  Accessories:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85"
 };
+function productImage(p){
+  return p.image || categoryImages[p.category];
+}
 function render(){
  let q=$("#search").value.trim().toLowerCase(), f=document.querySelector("#filters .active").dataset.filter;
  let list=products.filter(p=>(f==="All"||p.category===f)&&p.name.toLowerCase().includes(q));
  const s=$("#sort").value;if(s==="low")list.sort((a,b)=>a.price-b.price);if(s==="high")list.sort((a,b)=>b.price-a.price);
- $("#grid").innerHTML=list.map(p=>{const i=products.indexOf(p), initials=p.name.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase(), img=categoryImages[p.category];
- return `<article class="product"><div class="visual has-photo"><img src="${img}" alt="Representative ${safe(p.category)} product image" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-note">REPRESENTATIVE IMAGE</span><span class="tag">${safe(p.category)}</span><span class="initial fallback">${safe(initials)}</span></div><div class="product-body"><div class="product-cat">${safe(p.category)}</div><h3>${safe(p.name)}</h3><div class="product-foot"><span class="price"><small>FROM </small>${money(p.price)}</span><button class="add" onclick="add(${i})">Add +</button></div></div></article>`}).join("")||'<div class="empty" style="grid-column:1/-1">No products matched your search.</div>';
+ $("#grid").innerHTML=list.map(p=>{const i=products.indexOf(p), initials=p.name.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase(), img=productImage(p);
+ return `<article class="product"><div class="visual has-photo"><img src="${img}" alt="Real photographic ${safe(p.name)} product image" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="photo-note">PRODUCT PHOTO</span><span class="tag">${safe(p.category)}</span><span class="initial fallback">${safe(initials)}</span></div><div class="product-body"><div class="product-cat">${safe(p.category)}</div><h3>${safe(p.name)}</h3><div class="product-foot"><span class="price"><small>FROM </small>${money(p.price)}</span><button class="add" onclick="add(${i})">Add +</button></div></div></article>`}).join("")||'<div class="empty" style="grid-column:1/-1">No products matched your search.</div>';
 }
 function add(i){const p=products[i],x=cart.find(a=>a.id===p.id);x?x.qty++:cart.push({...p,qty:1});save();updateCart();toast("Added to cart");openCart()}
 function save(){localStorage.setItem("usa_vendor_cart",JSON.stringify(cart))}
@@ -36,7 +39,7 @@ function checkout(){
  let msg="Hi USA Vendor! 👋\n\nI'd like to place an order:\n\n";
  cart.forEach(x=>msg+=`• ${x.name} × ${x.qty} — ${money(x.price*x.qty)}\n`);
  msg+=`\nEstimated total: ${money(total)}\n\nName: \nLocation: \n\nPlease confirm availability, final pricing and delivery details.`;
- window.open("https://wa.me/18127669345?text="+encodeURIComponent(msg),"_blank");
+ window.open("https://wa.me/14488677564?text="+encodeURIComponent(msg),"_blank");
 }
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
 $("#openCart").onclick=openCart;$("#closeCart").onclick=closeCart;$("#overlay").onclick=closeCart;$("#checkout").onclick=checkout;
