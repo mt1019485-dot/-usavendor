@@ -14,7 +14,12 @@ const categoryImages={
  Accessories:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85"
 };
 function productImage(p){
-  return p.image || categoryImages[p.category];
+  const src = p.image || categoryImages[p.category];
+  if(!src) return "";
+  if(src.startsWith("https://images.unsplash.com/")){
+    return "/.netlify/images?url=" + encodeURIComponent(src) + "&fit=cover&width=900&height=900&quality=82";
+  }
+  return src;
 }
 function render(){
  let q=$("#search").value.trim().toLowerCase(), f=document.querySelector("#filters .active").dataset.filter;
