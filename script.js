@@ -44,7 +44,7 @@ function checkout(){
  let msg="Hi USA Vendor! 👋\n\nI'd like to place an order:\n\n";
  cart.forEach(x=>msg+=`• ${x.name} × ${x.qty} — ${money(x.price*x.qty)}\n`);
  msg+=`\nEstimated total: ${money(total)}\n\nName: \nLocation: \n\nPlease confirm availability, final pricing and delivery details.`;
- window.open("https://wa.me/14488677564?text="+encodeURIComponent(msg),"_blank");
+ window.open("https://wa.me/18702517376?text="+encodeURIComponent(msg),"_blank");
 }
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),1600)}
 $("#openCart").onclick=openCart;$("#closeCart").onclick=closeCart;$("#overlay").onclick=closeCart;$("#checkout").onclick=checkout;
