@@ -1,0 +1,8 @@
+[build]
+functions = "netlify/functions"
+
+[images]
+remote_images = ['https://images\\.unsplash\\.com']
+
+[functions]
+node_bundler = "esbuild"
